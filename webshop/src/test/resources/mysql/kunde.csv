@@ -1,0 +1,6 @@
+id;nachname;vorname;anmeldungsdatum;email;password;
+100;Alpha;Adrian;2001-01-01;k1@hska.de;100;
+101;Alpha;Alfred;2002-02-08;k2@hska.de;101;
+102;Alpha;Anton;2003-09-05;k3@hska.de;102;
+103;Delta;Dirk;2004-04-10;k4@hska.de;103;
+104;Epsilon;Emil;2005-03-21;k5@hska.de;104;

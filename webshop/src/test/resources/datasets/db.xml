@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE dataset SYSTEM "db.dtd">
+<dataset>
+  <adresse id="200" plz="76133" ort="Karlsruhe" strasse="Moltkestraße" hausnummer="31" kunde_fk="100" adresstyp="Lieferadresse"/>
+  <adresse id="201" plz="76133" ort="Karlsruhe" strasse="Moltkestraße" hausnummer="32" kunde_fk="101" adresstyp="Lieferadresse"/>
+  <adresse id="202" plz="76133" ort="Karlsruhe" strasse="Moltkestraße" hausnummer="33" kunde_fk="102" adresstyp="Lieferadresse"/>
+  <adresse id="203" plz="76133" ort="Karlsruhe" strasse="Moltkestraße" hausnummer="34" kunde_fk="103" adresstyp="Lieferadresse"/>
+  <adresse id="204" plz="76133" ort="Karlsruhe" strasse="Moltkestraße" hausnummer="35" kunde_fk="104" adresstyp="Lieferadresse"/>
+  <hibernate_sequence next_val="5000"/>
+  <kunde id="100" nachname="Alpha" vorname="Adrian" anmeldungsdatum="2001-01-01" email="k1@hska.de" passwort="100"/>
+  <kunde id="101" nachname="Alpha" vorname="Alfred" anmeldungsdatum="2002-02-08" email="k2@hska.de" passwort="101"/>
+  <kunde id="102" nachname="Alpha" vorname="Anton" anmeldungsdatum="2003-09-05" email="k3@hska.de" passwort="102"/>
+  <kunde id="103" nachname="Delta" vorname="Dirk" anmeldungsdatum="2004-04-10" email="k4@hska.de" passwort="103"/>
+  <kunde id="104" nachname="Epsilon" vorname="Emil" anmeldungsdatum="2005-03-21" email="k5@hska.de" passwort="104"/>
+</dataset>

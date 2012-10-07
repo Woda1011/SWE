@@ -1,0 +1,7 @@
+id;plz;ort;strasse;hausnummer;kunde_fk;adresstyp;
+200;76133;Karlsruhe;Moltkestraße;31;100;Lieferadresse;
+201;76133;Karlsruhe;Moltkestraße;32;101;Lieferadresse;
+201;76133;Karlsruhe;Moltkestraße;32;101;Rechnungsadresse;
+202;76133;Karlsruhe;Moltkestraße;33;102;Lieferadresse;
+203;76133;Karlsruhe;Moltkestraße;34;103;Lieferadresse;
+204;76133;Karlsruhe;Moltkestraße;35;104;Lieferadresse;

@@ -1,0 +1,31 @@
+<!ELEMENT dataset (
+    adresse*,
+    hibernate_sequence*,
+    kunde*)>
+
+<!ELEMENT adresse EMPTY>
+<!ATTLIST adresse
+    id CDATA #REQUIRED
+    plz CDATA #REQUIRED
+    ort CDATA #REQUIRED
+    strasse CDATA #REQUIRED
+    hausnummer CDATA #REQUIRED
+    kunde_fk CDATA #REQUIRED
+    adresstyp CDATA #IMPLIED
+>
+
+<!ELEMENT hibernate_sequence EMPTY>
+<!ATTLIST hibernate_sequence
+    next_val CDATA #REQUIRED
+>
+
+<!ELEMENT kunde EMPTY>
+<!ATTLIST kunde
+    id CDATA #REQUIRED
+    nachname CDATA #REQUIRED
+    vorname CDATA #REQUIRED
+    anmeldungsdatum CDATA #REQUIRED
+    email CDATA #REQUIRED
+    passwort CDATA #REQUIRED
+>
+
