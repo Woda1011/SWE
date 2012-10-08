@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,7 +29,17 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "kunde")
+@NamedQueries({
+	@NamedQuery(name = Kunde.KUNDE_BY_ID, query = "FROM Kunde k WHERE k.id = :id"),
+	@NamedQuery(name = Kunde.KUNDE_BY_NACHNAME, query = "FROM Kunde k WHERE k.nachname = :nachname"),
+	@NamedQuery(name = Kunde.KUNDE_BY_PLZ_AND_LIEFERADRESSE, query = "FROM Kunde k JOIN k.adressen a WHERE a.plz = :plz AND a.adresstyp = :adresstyp") })
+
 public class Kunde implements Serializable{
+
+private static final String PREFIX = "Kunde.";
+protected static final String KUNDE_BY_ID = PREFIX + "findKundeById";
+protected static final String KUNDE_BY_NACHNAME = PREFIX + "findKundeByNachname";
+protected static final String KUNDE_BY_PLZ_AND_LIEFERADRESSE =  PREFIX + "findKundenByPlz";
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -5819309159091253609L;
@@ -50,7 +62,6 @@ public class Kunde implements Serializable{
 	@Column(name = "email", length = 64, nullable = false, unique = true)
 	private String email;
 	
-	@Transient
 	@OneToMany(fetch = EAGER, cascade = PERSIST)
 	@JoinColumn(name = "kunde_fk", nullable = false)
 	private List<Adresse> adressen; 
@@ -92,12 +103,12 @@ public class Kunde implements Serializable{
 	}
 
 	public Date getAnmeldungsdatum() {
-		return anmeldungsdatum;
+		return anmeldungsdatum == null ? null : (Date) anmeldungsdatum.clone();
 	}
 
 
 	public void setAnmeldungsdatum(Date anmeldungsdatum) {
-		this.anmeldungsdatum = anmeldungsdatum;
+		this.anmeldungsdatum = anmeldungsdatum == null ? null : (Date) anmeldungsdatum.clone();
 	}
 
 
