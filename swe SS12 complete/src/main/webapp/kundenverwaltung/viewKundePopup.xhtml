@@ -1,0 +1,133 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+			    xmlns:h="http://java.sun.com/jsf/html"
+			    xmlns:f="http://java.sun.com/jsf/core"
+			    xmlns:rich="http://richfaces.org/rich"
+			    xmlns:a4j="http://richfaces.org/a4j">
+			    
+	<rich:tabPanel id="tabPanel" switchType="client">
+		<rich:tab id="stammdatenTab">
+			<f:facet name="header">
+				<h:panelGroup id="stammdatenLabel">
+					<h:graphicImage id="stammdatenGif"
+					                name="stammdaten.gif"
+					                library="images"/>
+					#{' '}
+					#{msgKv['viewKundePopup.kunde.stammdaten']}
+				</h:panelGroup>
+			</f:facet>
+			
+			<rich:panel id="stammdatenPanel">
+				<h:panelGrid id="stammdatenGrid" columns="2">
+					<h:outputText id="idLabel" value="#{msgKv['viewKundePopup.kundenr']}"/>
+					<h:outputText id="id" value="#{kunde.id}"/>
+			
+					<h:outputText id="nachnameLabel" value="#{msgKv['viewKundePopup.nachname']}"/>
+					<h:outputText id="nachname" value="#{kunde.nachname}"/>
+		
+					<h:outputText id="vornameLabel" value="#{msgKv['viewKundePopup.vorname']}"/>
+					<h:outputText id="vorname" value="#{kunde.vorname}"/>
+					
+					<h:outputText id="emailLabel" value="#{msgKv['viewKundePopup.email']}"/>
+					<h:outputText id="email" value="#{kunde.email}"/>
+	
+					<h:outputText id="firmenkundeLabel" value="#{msgKv['viewKundePopup.kundenart']}" rendered="#{kunde.art eq 'F'}"/>
+					<h:outputText id="firmenkunde" value="#{msgKv['viewKundePopup.firmenkunde']}" rendered="#{kunde.art eq 'F'}"/>
+		
+					<h:outputText id="privatkundeLabel" value="#{msgKv['viewKundePopup.kundenart']}" rendered="#{kunde.art eq 'P'}"/>
+					<h:outputText id="privatkunde" value="#{msgKv['viewKundePopup.privatkunde']}" rendered="#{kunde.art eq 'P'}"/>
+				</h:panelGrid>
+			</rich:panel>
+		</rich:tab>
+		
+		<rich:tab id="bestellungenTab" rendered="#{not empty kunde.bestellungen}">
+							<f:facet name="header">
+								<h:panelGroup id="bestellungenLabel">
+									<h:graphicImage id="bestellungenGif"
+									                name="bestellungen.gif"
+									                library="images"/>
+									#{' '}
+									#{msgKv['viewKunde.kunde.bestellungen']}
+								</h:panelGroup>
+							</f:facet>
+							
+							<rich:dataTable id="bestellungenTabelle" value="#{kunde.bestellungen}" var="bestellung">
+								<f:facet name="header">
+									<rich:columnGroup id="positionenSpalten">
+										<rich:column id="artikelIdSpalte">
+											#{msgKv['viewKunde.artikel.id']}
+										</rich:column>
+										<rich:column id="herstellerSpalte">
+											#{msgKv['viewKunde.artikel.hersteller']}
+										</rich:column>
+										<rich:column id="modellSpalte">
+											#{msgKv['viewKunde.artikel.modell']}
+										</rich:column>
+										<rich:column id="bezeichnungSpalte">
+											#{msgKv['viewKunde.artikel.bezeichnung']}
+										</rich:column>
+										<rich:column id="anzahlSpalte">
+											#{msgKv['viewKunde.artikel.anzahl']}
+										</rich:column>
+									</rich:columnGroup>
+								</f:facet>
+								
+								<rich:column id="togglerSpalte" colspan="5">
+									<rich:collapsibleSubTableToggler id="subTableToggler"
+									                                 for="positionenSubtable"
+									                                 collapsedLabel="#{msgKv['viewKunde.bestellung']} #{bestellung.id} : #{bestellung.bestelldatum} : #{bestellung.status}"
+									                                 expandedLabel="#{msgKv['viewKunde.bestellung']} #{bestellung.id} : #{bestellung.bestelldatum} : #{bestellung.status}"
+									                                 rendered="#{not empty bestellung.bestellpositionen}"/>
+								</rich:column>
+								
+								<rich:collapsibleSubTable id="positionenSubtable"
+								                          value="#{bestellung.bestellpositionen}"
+								                          var="pos"
+								                          rowClasses="odd-row, even-row"
+									                      styleClass="tabelleMitZebrastil"
+								                          expandMode="client"
+								                          expanded="#{false}"> <!-- https://issues.jboss.org/browse/RF-10715 -->
+									<rich:column id="artikelIdSpalteSub">
+										#{pos.fahrzeug.id}
+									</rich:column>
+						
+									<rich:column id="herstellerSpalteSub">
+										#{pos.fahrzeug.hersteller.name}
+									</rich:column>
+						
+									<rich:column id="modellSpalteSub">
+										#{pos.fahrzeug.modell}
+									</rich:column>
+						
+									<rich:column id="bezeichnungSpalteSub">
+										#{pos.fahrzeug.beschreibung}
+									</rich:column>
+						
+									<rich:column id="anzahlSpalteSub">
+										#{pos.anzahl}
+									</rich:column>
+								</rich:collapsibleSubTable>		
+							
+								<a4j:outputPanel id="outputPanelZebra" ajaxRendered="true">
+									<rich:jQuery id="odd"
+									             selector=".tabelleMitZebrastil tr:odd"
+									             query="addClass('odd-row')"
+									             timing="domready"/>
+									<rich:jQuery id="even"
+									             selector=".tabelleMitZebrastil tr:even"
+									             query="addClass('even-row')"
+									             timing="domready"/>
+									<rich:jQuery id="mouseover"
+									             selector=".tabelleMitZebrastil tr"
+									             event="mouseover"
+									             query="jQuery(this).addClass('active-row')"
+									             timing="domready"/>
+									<rich:jQuery id="mouseout"
+									             selector=".tabelleMitZebrastil tr"
+									             event="mouseout"
+									             query="jQuery(this).removeClass('active-row')"
+									             timing="domready"/>
+								</a4j:outputPanel>
+							</rich:dataTable>
+						</rich:tab>
+	</rich:tabPanel>
+</ui:composition>
